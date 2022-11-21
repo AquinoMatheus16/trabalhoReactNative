@@ -49,10 +49,15 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'column',
         borderRadius: 7,
-        shadowColor: 'black',
-        shadowOffset: {width: -4, height: 7},
-        shadowOpacity: 0.3,
-        shadowRadius: 3,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        
+        elevation: 5,
     },
 
     input: {
