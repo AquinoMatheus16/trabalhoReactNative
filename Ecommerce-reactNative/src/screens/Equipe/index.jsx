@@ -3,12 +3,10 @@ import { Text, View, Image, ScrollView, TouchableOpacity, Linking, ToastAndroid 
 import { Entypo, AntDesign, FontAwesome } from '@expo/vector-icons';
 import { styles } from './styles.js';
 
-import Header from './assets/components/Header';
-
 export default function Equipe() {
 
-  const openUrl = async(url) => {
-    if(await Linking.canOpenURL(url)) {
+  const openUrl = async (url) => {
+    if (await Linking.canOpenURL(url)) {
       await Linking.openURL(url)
     }
     else {
@@ -23,7 +21,7 @@ export default function Equipe() {
         <View style={styles.integrantes}>
           <View style={styles.cardPessoa}>
             <Image
-              source={require('./assets/foto01.jpg')}
+              source={require('../../../assets/foto01.jpg')}
               style={styles.foto}
             />
             <Text style={styles.nome}>Marcelle Machado</Text>
@@ -39,7 +37,7 @@ export default function Equipe() {
 
           <View style={styles.cardPessoa}>
             <Image
-              source={require('./assets/foto02.jpeg')}
+              source={require('../../../assets/foto02.jpeg')}
               style={styles.foto}
             />
             <Text style={styles.nome}>Ricardo Andrade</Text>
@@ -55,7 +53,7 @@ export default function Equipe() {
 
           <View style={styles.cardPessoa}>
             <Image
-              source={require('./assets/foto03.jpeg')}
+              source={require('../../../assets/foto03.jpeg')}
               style={styles.foto}
             />
             <Text style={styles.nome}>Matheus Aquino</Text>
@@ -71,7 +69,7 @@ export default function Equipe() {
 
           <View style={styles.cardPessoa}>
             <Image
-              source={require('./assets/foto04.jpeg')}
+              source={require('../../../assets/foto04.jpeg')}
               style={styles.foto}
             />
             <Text style={styles.nome}>Fábio Gurgel</Text>
@@ -87,7 +85,7 @@ export default function Equipe() {
 
           <View style={styles.cardPessoa}>
             <Image
-              source={require('./assets/foto05.jpeg')}
+              source={require('../../../assets/foto05.jpeg')}
               style={styles.foto}
             />
             <Text style={styles.nome}>Anthony Barbosa</Text>
@@ -102,13 +100,13 @@ export default function Equipe() {
           </View>
 
           <View style={styles.cardPessoa}>
-          <TouchableOpacity onPress={() => openUrl('https://github.com/AquinoMatheus16/trabalhoReactNative')} >
-            <FontAwesome name="file-code-o" size={80} color="black" />
-          </TouchableOpacity>
+            <TouchableOpacity onPress={() => openUrl('https://github.com/AquinoMatheus16/trabalhoReactNative')} >
+              <FontAwesome name="file-code-o" size={80} color="black" />
+            </TouchableOpacity>
             <Text style={styles.nome}>Repositório App</Text>
           </View>
 
-          
+
         </View>
       </ScrollView>
       <StatusBar style="auto" />
