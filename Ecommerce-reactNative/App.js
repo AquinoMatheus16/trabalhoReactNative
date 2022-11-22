@@ -1,12 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import { Insert } from './src/screens/Insert';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <>
+      <Insert />
+
+      <StatusBar barStyle='light-content' hidden={false} backgroundColor='dodgerblue' translucent={false} networkActivityIndicatorVisible={true} />
+    </>
   );
 }
 
