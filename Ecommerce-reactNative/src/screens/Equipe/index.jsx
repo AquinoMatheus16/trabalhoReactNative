@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { Text, View, Image, ScrollView, TouchableOpacity, Linking, ToastAndroid } from 'react-native';
 import { Entypo, AntDesign, FontAwesome } from '@expo/vector-icons';
 import { styles } from './styles.js';
+
 import Header from './assets/components/Header';
 
 export default function Equipe() {
@@ -17,7 +18,6 @@ export default function Equipe() {
 
   return (
     <View style={styles.container}>
-      <Header/>
       <ScrollView>
         <Text style={styles.tituloPagina}>Equipe:</Text>
         <View style={styles.integrantes}>

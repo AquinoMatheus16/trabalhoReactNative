@@ -1,100 +1,53 @@
-import { Text, View, StyleSheet, TextInput, TouchableOpacity, ImageBackground } from 'react-native';
-import logo from '../../images/drogatec_Logo.png'
+import { useContext, useState } from 'react';
+import { Text, View, TextInput, TouchableOpacity, ImageBackground, ScrollView } from 'react-native';
+import { AuthContext } from '../../contexts/AuthContext';
+import logo from '../../images/drogatec_Logo.png';
+import { styles } from './styles';
 
+export const Login = () => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const { loginContext } = useContext(AuthContext);
 
-const Login = () => {
-
-    return (
-        <View style={styles.containerPrincipal}>
-            <View style={styles.containerLogin}>
-
-                <View style={styles.logoContainer}>
-                    <ImageBackground source={logo}/>
-                </View>
-
-                <Text>LOGIN</Text>
-                <TextInput style={styles.input} placeholder='INSIRA SEU LOGIN' />
-                <Text>SENHA</Text>
-                <TextInput style={styles.input} placeholder='INSIRA SUA SENHA' />
-
-                <TouchableOpacity>
-                    <View style={styles.botaoEntrar}>
-                        <Text>ENTRAR</Text>
-                    </View>
-                </TouchableOpacity>
-
-            </View>
-
-        </View>
-    );
-};
-
-const styles = StyleSheet.create({
-    containerPrincipal: {
-        flex: 1,
-        width: '100%',
-        height: '100%',
-        backgroundColor: 'dodgerblue',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-
-    containerLogin: {
-        width: '85%',
-        height: '65%',
-        backgroundColor: 'white',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexDirection: 'column',
-        borderRadius: 7,
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        
-        elevation: 5,
-    },
-
-    input: {
-        height: 35,
-        width: 235,
-        margin: 12,
-        borderWidth: 1,
-        padding: 10,
-        borderRadius: 10
-    },
-
-    botaoEntrar: {
-        backgroundColor: '#ef4036',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: 5,
-        width: 100,
-        height: 30,
-        borderRadius: 10,
-        marginTop: 30,
-
-    },
-
-    entrar: {
-      color: 'white',
-      fontWeight: 'bold'
-    },
-
-    logoContainer: {
-        width: 210,
-        height: 40,
-        backgroundColor: 'white',
-        borderRadius: 10,
-        marginBotto: 20
+  const handleLogin = async () => {
+    if (username != '' && password != '') {
+      loginContext();
     }
 
+  };
 
-});
+  return (
+    <View style={styles.containerPrincipal}>
+      <View style={styles.containerLogin}>
 
-export default Login;
+        <View style={styles.logoContainer}>
+          <ImageBackground source={logo} />
+        </View>
+
+        <Text>LOGIN</Text>
+        <TextInput
+          style={styles.input}
+          placeholder='INSIRA SEU LOGIN'
+          // onChangeText={(e) => setUsername(e.target.value)}
+          onChangeText={setUsername}
+          value={username}
+        />
+
+        <Text>SENHA</Text>
+        <TextInput
+          style={styles.input}
+          placeholder='INSIRA SUA SENHA'
+          // onChangeText={(e) => setPassword(e.target.value)}
+          onChangeText={setPassword}
+          value={password}
+        />
+
+        <TouchableOpacity onPress={() => handleLogin()}>
+          <View style={styles.botaoEntrar}>
+            <Text>ENTRAR</Text>
+          </View>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+};
