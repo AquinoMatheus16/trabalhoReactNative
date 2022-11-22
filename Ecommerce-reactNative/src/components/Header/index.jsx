@@ -4,6 +4,7 @@ import { Entypo } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
 
 export default function Header() {
+
     return (
         <View style={styles.header}>
             <Image
