@@ -92,15 +92,15 @@ export default function Equipe() {
 
           <View style={styles.cardPessoa}>
             <Image
-              source={require('./assets/foto01.jpg')}
+              source={require('./assets/foto05.jpeg')}
               style={styles.foto}
             />
             <Text style={styles.nome}>Anthony Barbosa</Text>
             <View style={styles.iconesRedes}>
-              <TouchableOpacity onPress={() => openUrl('https://github.com/MarcelleMachado')} >
+              <TouchableOpacity onPress={() => openUrl('https://github.com/anthonybarbosa15')} >
                 <AntDesign name="github" size={24} color="black" />
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => openUrl('https://www.linkedin.com/in/marcellermachado/')} >
+              <TouchableOpacity onPress={() => openUrl('https://www.linkedin.com/in/anthony-barbosa-467073258/')} >
                 <Entypo name="linkedin-with-circle" size={24} color="black" />
               </TouchableOpacity>
             </View>
