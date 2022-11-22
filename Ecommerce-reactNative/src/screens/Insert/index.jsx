@@ -23,20 +23,12 @@ export const Insert = () => {
                 <View style={styles.main}>
                     <EvilIcons name="image" size={300} color="black" />
 
-                    <FlatList
-                        data={produto}
-                        keyExtractor={item => item.id}
-                        renderItem={({ item }) => <Card item={item} />}
-                    />
-
                     <View style={styles.container2}>
-                        {/* <Text style={styles.textProduto}>Imagem do produto:</Text> */}
                         <Text>Imagem do produto: </Text>
 
                         <TouchableOpacity style={styles.buttonArquivo} onPress={() => { }}>
                             <Text style={styles.buttonText}>Selecionar arquivo</Text>
                         </TouchableOpacity>
-
                     </View>
 
                     <Text style={styles.titulo}>Nome produto:</Text>
@@ -53,6 +45,7 @@ export const Insert = () => {
                         multiline
                         numberOfLines={9}
                         placeholder='Digite a descrição do produto (máx.200)'
+                        // placeholderStyle={{ fontFamily: "AnotherFont", borderColor: '#f3f3' }}
                     />
 
                     <Text style={styles.titulo}>Categoria: </Text>
