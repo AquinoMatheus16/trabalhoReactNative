@@ -3,7 +3,7 @@ import { Text, View, Image, ScrollView, TouchableOpacity, Linking, ToastAndroid 
 import { Entypo, AntDesign, FontAwesome } from '@expo/vector-icons';
 import { styles } from './styles.js';
 
-export default function Equipe() {
+export const Equipe = () => {
 
   const openUrl = async (url) => {
     if (await Linking.canOpenURL(url)) {
@@ -105,8 +105,6 @@ export default function Equipe() {
             </TouchableOpacity>
             <Text style={styles.nome}>Repositório App</Text>
           </View>
-
-
         </View>
       </ScrollView>
       <StatusBar style="auto" />

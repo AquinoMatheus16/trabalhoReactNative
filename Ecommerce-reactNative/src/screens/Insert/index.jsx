@@ -77,7 +77,6 @@ export const Insert = () => {
                     />
 
                     <Text style={styles.titulo}>Categoria: </Text>
-
                     <View style={styles.containerCategoria}>
                         <SelectList
                             setSelected={(categoria) => setSelected(categoria)}
@@ -90,7 +89,6 @@ export const Insert = () => {
                             placeholder='Categoria'
                         />
                     </View>
-
 
                     <Text style={styles.titulo}>Quantidade em estoque: </Text>
                     <TextInput
@@ -115,7 +113,6 @@ export const Insert = () => {
                             value={valorUnitario}
                         />
                     </View>
-
 
                     <TouchableOpacity style={styles.buttonSalvar}  >
                         <Text style={styles.buttonText}>SALVAR   ALTERAÇÕES</Text>

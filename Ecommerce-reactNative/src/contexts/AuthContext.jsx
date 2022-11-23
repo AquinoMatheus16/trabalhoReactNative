@@ -13,11 +13,9 @@ export const AuthProvider = ({ children }) => {
         const response = await login(username, password)
         // console.log(response);
         // console.log(response.headers.authorization);
-        console.log(response.user);
         if (response.headers.authorization) {
             setUser(response.config.data)
             api.defaults.headers['Authorization'] = `Bearer ${response.headers.authorization}`
-            console.log("Foi");
             await AsyncStorage.setItem("@app_user", JSON.stringify(response.config.data))
             await AsyncStorage.setItem("@app_token", response.headers.authorization)
         }

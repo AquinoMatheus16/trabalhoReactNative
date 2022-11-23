@@ -3,7 +3,7 @@ import { api } from './api';
 // GET
 export const getProduto = async () => {
     try {
-        const { data } = await api.get("/produto")
+        const { data } = await api.get("/api/produto")
         console.log(data)
         return data;
     } catch (e) {

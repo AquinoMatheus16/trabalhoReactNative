@@ -1,28 +1,41 @@
 import { FontAwesome } from '@expo/vector-icons';
-import { StyleSheet, Text, View, StatusBar, TextInput, ScrollView, Image, FlatList } from 'react-native';
-import Header from './src/components/Header';
-import CardProduto from './src/components/CardProduto';
-import { useState } from 'react';
+import { View, TextInput, FlatList } from 'react-native';
+// import { CardProduto } from '../../components/CardProduto';
+import { useEffect, useState } from 'react';
 import { styles } from './styles';
+import { Card } from '../../components/Card';
+import { getProduto } from '../../services/produtoCrud';
 
-export default function App() {
-  const [produtos, setProdutos] = useState([])
+export const Home = () => {
+  const [produtos, setProdutos] = useState([]);
+
+  const fetchData = async () => {
+    const produtokList = await getProduto();
+    setProdutos(produtokList);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <View style={styles.container}>
-      <FlatList
-        data={produtos}
-        keyExtractor={item => item.id}
-        renderItem={({ item }) => <Card item={item} />} />
-      <Header />
-      <StatusBar />
       <View style={styles.containerInput}>
         <View style={styles.input}>
-          <TextInput placeholder='Pesquisar Produto'></TextInput>
+          <TextInput placeholder='Pesquisar Produto' />
           <FontAwesome name="search" size={22} color="black" />
         </View>
       </View>
-      <CardProduto />
+
+      <View style={styles.containerFlat}>
+        <FlatList
+          data={produtos}
+          keyExtractor={item => item.idProduto}
+          renderItem={({ item }) => <Card item={item} />}
+        />
+        
+      </View>
+      {/* <View style={styles.}/> */}
     </View>
   );
 }
