@@ -21,6 +21,10 @@ export const styles = StyleSheet.create({
         // backgroundColor: '#0433',
         alignItems: 'center'
     },
+    containerCategoria: {
+        width: '80%',
+        // backgroundColor:'#8555'
+    },
 
     containerValorUnitario: {
         flexDirection: 'row',

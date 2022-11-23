@@ -2,8 +2,11 @@ import { View, Text, TextInput, TouchableOpacity, ScrollView, Image, FlatList } 
 import { styles } from './styles';
 import { EvilIcons, MaterialIcons } from '@expo/vector-icons';
 import { getImagem } from '../../services/produtoCrud';
+import { SelectList } from 'react-native-dropdown-select-list';
 
 import { useState, useEffect } from 'react';
+import { api } from '../../services/api';
+import React from 'react';
 
 export const Insert = () => {
     const [produto, setProduto] = useState([]);
@@ -11,14 +14,32 @@ export const Insert = () => {
     const [qtdEstoque, setQtdEstoque] = useState("");
     const [valorUnitario, setValorUnitario] = useState("");
     const [categoria, setCategoria] = useState("");
+    const [nome, setNome] = useState("");
+    const [selected, setSelected] = React.useState("");
+    const [data, setData] = React.useState([]);
 
     const fetchData = async () => {
         const produtoList = await getImagem();
         setProduto(produtoList);
     };
 
+    const getCategoria = async () => {
+        api.get('/api/produto')
+            .then((response) => {
+                // Store Values in Temporary Array
+                let newArray = response.data.map((item) => {
+                    return { key: item.idCategoria, value: item.nome }
+                })
+                //Set Data Variable
+                setData(newArray)
+            })
+            .catch((e) => {
+                console.log(e)
+            })
+    }
+
     useEffect(() => {
-        fetchData();
+        getCategoria()
     }, []);
 
     return (
@@ -56,14 +77,20 @@ export const Insert = () => {
                     />
 
                     <Text style={styles.titulo}>Categoria: </Text>
-                    <TextInput
-                        style={styles.inputNome}
-                        // keyboardType='numbers-and-punctuation'
-                        textAlign='left'
-                        placeholder='Selecione a categoria'
-                        onChangeText={setCategoria}
-                        value={categoria}
-                    />
+
+                    <View style={styles.containerCategoria}>
+                        <SelectList
+                            setSelected={(categoria) => setSelected(categoria)}
+                            data={data}
+                            save={setCategoria}
+                            // onSelect={() => ()}
+                            boxStyles={{ borderRadius: 0, borderColor: 'black' }}
+                            dropdownStyles={{ borderRadius: 0, borderColor: 'black' }}
+                            searchPlaceholder='Pesquisar'
+                            placeholder='Categoria'
+                        />
+                    </View>
+
 
                     <Text style={styles.titulo}>Quantidade em estoque: </Text>
                     <TextInput
@@ -84,19 +111,17 @@ export const Insert = () => {
                             style={styles.inputValorUnitario}
                             keyboardType='numeric'
                             placeholder='Digite o valor unitário do produto'
+                            onChangeText={setValorUnitario}
+                            value={valorUnitario}
                         />
                     </View>
 
 
-                    <TouchableOpacity
-                        style={styles.buttonSalvar}
-                    >
+                    <TouchableOpacity style={styles.buttonSalvar}  >
                         <Text style={styles.buttonText}>SALVAR   ALTERAÇÕES</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity
-                        style={styles.buttonDeletar}
-                    >
+                    <TouchableOpacity style={styles.buttonDeletar} >
                         <Text style={styles.buttonText}>DELETAR   PRODUTO</Text>
                     </TouchableOpacity>
 
