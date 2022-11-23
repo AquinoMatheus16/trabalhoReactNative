@@ -17,6 +17,7 @@ export const Insert = () => {
     const [nome, setNome] = useState("");
     const [selected, setSelected] = React.useState("");
     const [data, setData] = React.useState([]);
+    const [singleFile, setSingleFile] = useState(null);
 
     const fetchData = async () => {
         const produtoList = await getImagem();
@@ -42,6 +43,69 @@ export const Insert = () => {
         getCategoria()
     }, []);
 
+    const uploadImage = async () => {
+        // Check if any file is selected or not
+        // console.log("foi");
+        if (singleFile != null) {
+            // If file selected then create FormData
+            console.log("foi");
+            const fileToUpload = singleFile;
+            const data = new FormData();
+            data.append('name', 'Image Upload');
+            data.append('file_attachment', fileToUpload);
+            // Please change file upload URL
+            let res = await fetch(
+                'http://localhost/upload.php',
+                {
+                    method: 'post',
+                    body: data,
+                    headers: {
+                        'Content-Type': 'multipart/form-data; ',
+                    },
+                }
+            );
+            console.log(res);
+            let responseJson = await res.json();
+            if (responseJson.status == 1) {
+                alert('Upload Successful');
+            }
+        } else {
+            // If no file selected the show alert
+            alert('Please Select File first');
+        }
+    };
+
+    const selectFile = async () => {
+        // Opening Document Picker to select one file
+        try {
+          const res = await DocumentPicker.pick({
+            // Provide which type of file you want user to pick
+            type: [DocumentPicker.types.allFiles],
+            // There can me more options as well
+            // DocumentPicker.types.allFiles
+            // DocumentPicker.types.images
+            // DocumentPicker.types.plainText
+            // DocumentPicker.types.audio
+            // DocumentPicker.types.pdf
+          });
+          // Printing the log realted to the file
+          console.log('res : ' + JSON.stringify(res));
+          // Setting the state to show single file attributes
+          setSingleFile(res);
+        } catch (err) {
+          setSingleFile(null);
+          // Handling any exception (If any)
+          if (DocumentPicker.isCancel(err)) {
+            // If user canceled the document selection
+            alert('Canceled');
+          } else {
+            // For Unknown Error
+            alert('Unknown Error: ' + JSON.stringify(err));
+            throw err;
+          }
+        }
+      };
+
     return (
         <ScrollView>
             <View style={styles.container}>
@@ -51,7 +115,9 @@ export const Insert = () => {
                     <View style={styles.container2}>
                         <Text>Imagem do produto: </Text>
 
-                        <TouchableOpacity style={styles.buttonArquivo} onPress={() => { }}>
+                        <TouchableOpacity
+                            style={styles.buttonArquivo}
+                            onPress={selectFile}>
                             <Text style={styles.buttonText}>Selecionar arquivo</Text>
                         </TouchableOpacity>
                     </View>

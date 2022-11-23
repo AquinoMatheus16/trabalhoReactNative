@@ -5,29 +5,20 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'dodgerblue',
     paddingBottom: 90
-    // alignItems: 'center',
-    // justifyContent: 'center'
   },
   containerInput: {
     marginTop: '12%',
     width: '100%',
-    height: '7%',
+    height: 40,
     alignItems: 'center',
-
     marginBottom: 20
   },
-  // containerFlat: {
-  //   alignItems: 'stretch',
-  //   justifyContent: 'center'
-  // },
 
-  input: {
-    // width: '80%',
-    // height: '100%',
-    // maxHeight:,
+  inputBusca: {
     paddingHorizontal: 40,
+    width: '90%',
     paddingVertical: 1,
-    backgroundColor: 'white',
+    backgroundColor:'#FFF',
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
@@ -41,6 +32,14 @@ export const styles = StyleSheet.create({
     shadowRadius: 3.84,
 
     elevation: 5,
-
   },
+  input: {
+    minHeight: 40,
+    width: '90%',
+    padding: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    borderRadius: 10,
+  }
 });
