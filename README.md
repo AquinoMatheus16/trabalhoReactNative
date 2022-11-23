@@ -42,6 +42,8 @@ O app mobile foi desenvolvido em React Native e foi utilizada uma REST API para 
 <br/>`Tecnologias utilizadas:`<br/>
 - React Native;
 - VsCode;
+- Spring Tools Suite 4;
+- DBeaver;
 
 ##
 
