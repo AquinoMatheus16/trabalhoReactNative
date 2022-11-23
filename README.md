@@ -1,7 +1,7 @@
 # Desenvolvimento de Aplicativo Mobile:
 ### Trabalho final da matéria:
-<img src="https://img.shields.io/badge/Versão-1.0.0-crimson"/> <img src="https://img.shields.io/badge/Data%20de%20lançamento:-XX_de_Novembro_|_2022-ghostwhite">
-<img src="https://img.shields.io/badge/Última_Modificação:-XX_de_Novembro_|_2022-dodgerblue"/>
+<img src="https://img.shields.io/badge/Versão-1.0.0-mediumturquoise"/> <img src="https://img.shields.io/badge/Data%20de%20lançamento:-XX_de_Novembro_|_2022-ghostwhite">
+<img src="https://img.shields.io/badge/Última_Modificação:-XX_de_Novembro_|_2022-mediumaquamarine"/>
 <br/>
 
 <div align="center">
