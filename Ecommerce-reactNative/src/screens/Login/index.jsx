@@ -40,6 +40,7 @@ export const Login = () => {
           // onChangeText={(e) => setPassword(e.target.value)}
           onChangeText={setPassword}
           value={password}
+          secureTextEntry={true}
         />
 
         <TouchableOpacity onPress={() => handleLogin()}>

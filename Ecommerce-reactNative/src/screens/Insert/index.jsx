@@ -7,6 +7,10 @@ import { useState, useEffect } from 'react';
 
 export const Insert = () => {
     const [produto, setProduto] = useState([]);
+    const [descricao, setDescricao] = useState("");
+    const [qtdEstoque, setQtdEstoque] = useState("");
+    const [valorUnitario, setValorUnitario] = useState("");
+    const [categoria, setCategoria] = useState("");
 
     const fetchData = async () => {
         const produtoList = await getImagem();
@@ -37,6 +41,8 @@ export const Insert = () => {
                         // keyboardType='phone'
                         textAlign='left'
                         placeholder='Digite o nome do produto (máx.30)'
+                        onChangeText={setNome}
+                        value={nome}
                     />
 
                     <Text style={styles.titulo}>Descrição:</Text>
@@ -45,7 +51,8 @@ export const Insert = () => {
                         multiline
                         numberOfLines={9}
                         placeholder='Digite a descrição do produto (máx.200)'
-                        // placeholderStyle={{ fontFamily: "AnotherFont", borderColor: '#f3f3' }}
+                        onChangeText={setDescricao}
+                        value={descricao}
                     />
 
                     <Text style={styles.titulo}>Categoria: </Text>
@@ -54,6 +61,8 @@ export const Insert = () => {
                         // keyboardType='numbers-and-punctuation'
                         textAlign='left'
                         placeholder='Selecione a categoria'
+                        onChangeText={setCategoria}
+                        value={categoria}
                     />
 
                     <Text style={styles.titulo}>Quantidade em estoque: </Text>
@@ -62,6 +71,8 @@ export const Insert = () => {
                         keyboardType='numeric'
                         textAlign='left'
                         placeholder='Digite a quantidade em estoque'
+                        onChangeText={setQtdEstoque}
+                        value={qtdEstoque}
                     />
 
                     <Text style={styles.titulo}>Valor unitário: </Text>

@@ -7,8 +7,7 @@ import Equipe from '../screens/Equipe';
 import { Home } from '../screens/Home';
 import { Insert } from '../screens/Insert';
 import { Updade } from '../screens/UpdateDelete';
-import { FontAwesome, FontAwesome5, AntDesign } from '@expo/vector-icons';
-
+import { FontAwesome, FontAwesome5, AntDesign, Feather } from '@expo/vector-icons';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator()
@@ -32,25 +31,29 @@ export const RotasPrivadas = () => {
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {
             let iconName;
+            let iconColor;
 
             if (route.name === 'Insert') {
               iconName = focused
                 ? 'ios-information-circle'
                 : 'ios-information-circle-outline';
-              return <AntDesign name="pluscircleo" size={24} color="black" />;
+              iconColor = focused ? 'red' : 'black';
+              return <AntDesign name="pluscircleo" size={24} color={iconColor} />;
 
             } else if (route.name === 'Equipe') {
               iconName = focused ? 'ios-list' : 'ios-list-outline';
-              return <FontAwesome5 name="user-astronaut" size={24} color="black" />;
+              iconColor = focused ? 'red' : 'black';
+              return <FontAwesome5 name="user-astronaut" size={24} color={iconColor} />;
 
             } else if (route.name === 'LOGOUT') {
               iconName = focused ? 'ios-list' : 'ios-list-outline';
-              return <FontAwesome name="trash" size={24} color="black" />;
+              iconColor = focused ? 'red' : 'black';
+              return <Feather name="log-out" size={24} color={iconColor} />;
 
             } else if (route.name === 'Home') {
               iconName = focused ? 'ios-list' : 'ios-list-outline';
-              return <FontAwesome name="home" size={24} color="black" />;
-
+              iconColor = focused ? 'red' : 'black';
+              return <FontAwesome name="home" size={24} color={iconColor} />;
             }
             // You can return any component that you like here!
             // return <FontAwesome name="home" size={24} color="black" />;
@@ -75,7 +78,6 @@ export const RotasPrivadas = () => {
 
         <Tab.Screen name="LOGOUT" component={() => logoutContext()} options={{ headerShown: false }} />
 
-        {/* <Button title='LOGOUT' onPress={() => logoutContext()} /> */}
       </Tab.Navigator>
     </>
   );
