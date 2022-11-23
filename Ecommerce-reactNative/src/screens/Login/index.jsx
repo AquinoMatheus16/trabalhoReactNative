@@ -21,7 +21,7 @@ export const Login = () => {
       <View style={styles.containerLogin}>
 
         <View style={styles.logoContainer}>
-          <ImageBackground source={logo} />
+          <ImageBackground source={logo} style={styles.imagemLogo}/>
         </View>
 
         <Text>LOGIN</Text>
@@ -45,7 +45,7 @@ export const Login = () => {
 
         <TouchableOpacity onPress={() => handleLogin()}>
           <View style={styles.botaoEntrar}>
-            <Text>ENTRAR</Text>
+            <Text style={styles.entrar}>ENTRAR</Text>
           </View>
         </TouchableOpacity>
       </View>
