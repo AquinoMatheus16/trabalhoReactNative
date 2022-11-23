@@ -27,6 +27,7 @@ export const styles = StyleSheet.create({
             width: 0,
             height: 2,
         },
+        minHeight: 400,
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
 
@@ -64,7 +65,11 @@ export const styles = StyleSheet.create({
         height: 40,
         backgroundColor: 'white',
         borderRadius: 10,
-        marginBotto: 20
+        marginBottom: 100
+    },
+
+    imagemLogo: {
+        flex: 1,
     }
 
 
