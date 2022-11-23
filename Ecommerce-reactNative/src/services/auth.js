@@ -1,9 +1,6 @@
+import { api } from "./api"
 
-export const login = (username, password) => {
+export const login = async (username, password) => {
 
-    return new Promise(resolve => {
-        
-    }
-
-    )
+    return await api.post("/login", { username: username, password: password })
 }

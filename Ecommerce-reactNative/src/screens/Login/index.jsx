@@ -11,7 +11,7 @@ export const Login = () => {
 
   const handleLogin = async () => {
     if (username != '' && password != '') {
-      loginContext();
+      loginContext(username, password);
     }
 
   };

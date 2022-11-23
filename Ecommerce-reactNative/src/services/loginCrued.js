@@ -1,3 +1,4 @@
+import { api } from "./api";
 
 export const newLogin = async (novoLogin) => {
     try {
