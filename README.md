@@ -6,7 +6,7 @@
 
 <div align="center">
   <h1>E-COMMERCE: Drogaria - Drogatec 💊</h1>
-  <img src="/Imagens-readme/background1-readme.jpg" width="1000px" height="300">
+  <img src="/Imagens-readme/banner-readme.png" width="1000px" height="300">
   
  </div>
 
