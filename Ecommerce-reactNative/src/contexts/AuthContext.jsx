@@ -11,18 +11,22 @@ export const AuthProvider = ({ children }) => {
 
     const loginContext = async (username, password) => {
         const response = await login(username, password)
-        if (response.token && response.user) {
-            setUser(response.user)
-            api.defaults.headers['Authorization'] = `Bearer ${response.token}`
+        // console.log(response);
+        // console.log(response.headers.authorization);
+        console.log(response.user);
+        if (response.headers.authorization) {
+            setUser(response.config.data)
+            api.defaults.headers['Authorization'] = `Bearer ${response.headers.authorization}`
             console.log("Foi");
-            await AsyncStorage.setItem("@app_user", JSON.stringify(response.user))
-            await AsyncStorage.setItem("@app_token", response.token)
+            await AsyncStorage.setItem("@app_user", JSON.stringify(response.config.data))
+            await AsyncStorage.setItem("@app_token", response.headers.authorization)
         }
     };
 
     const logoutContext = () => {
         setUser(null)
         AsyncStorage.clear();
+        api.defaults.headers.Authorization = null;
     };
 
     useEffect(() => {
@@ -42,9 +46,6 @@ export const AuthProvider = ({ children }) => {
     }, [])
 
     return (
-        // <AuthContext.Provider value={{ logado: false }}>
-        //     {children}
-        // </AuthContext.Provider>
         <AuthContext.Provider value={{ logado: !!user, loginContext, logoutContext, loading: loading }}>
             {children}
         </AuthContext.Provider>
