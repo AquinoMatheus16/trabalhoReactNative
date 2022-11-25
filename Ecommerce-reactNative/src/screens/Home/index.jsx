@@ -5,12 +5,15 @@ import { useEffect, useState } from 'react';
 import { styles } from './styles';
 import { Card } from '../../components/Card';
 import { getProduto } from '../../services/produtoCrud';
+import { useNavigation } from '@react-navigation/native';
 
 export const Home = () => {
+
   const [produtos, setProdutos] = useState([]);
   const [itemFiltrado, setItemFiltrado] = useState([]);
   const [busca, setBusca] = useState();
   const [input, setInput] = useState();
+  const navigation = useNavigation();
 
   const fetchData = async () => {
     const produtoList = await getProduto();
@@ -19,6 +22,11 @@ export const Home = () => {
   };
 
   useEffect(() => {
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    navigation.addListener('focus', () => fetchData())
     fetchData();
   }, []);
 

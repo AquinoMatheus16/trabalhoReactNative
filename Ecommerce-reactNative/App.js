@@ -9,8 +9,6 @@ export default function App() {
       <AuthProvider>
         <Routes />
       </AuthProvider>
-
-      {/* <StatusBar barStyle='light-content' hidden={false} backgroundColor='#0066CC' translucent={false} networkActivityIndicatorVisible={true} /> */}
     </NavigationContainer>
   );
 };

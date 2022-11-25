@@ -7,25 +7,29 @@ import { api } from '../../services/api';
 import React from 'react';
 import * as ImagePicker from 'expo-image-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from "@react-navigation/native";
 
 export const Insert = () => {
-    const [produto, setProduto] = useState([]);
     const [descricao, setDescricao] = useState("");
     const [qtdEstoque, setQtdEstoque] = useState("");
     const [valorUnitario, setValorUnitario] = useState("");
     const [categoria, setCategoria] = useState("");
+    const [categoriasSalvas, setCategoriasSalvas] = useState("");
     const [nome, setNome] = useState("");
     const [selected, setSelected] = useState("");
     const [data, setData] = useState([]);
     const [image, setImage] = useState(null);
+    const navigation = useNavigation();
+    
 
     const getCategoria = async () => {
         api.get('/api/categoria')
             .then((response) => {
                 let newArray = response.data.map((item) => {
-                    return { key: item.idCategoria, value: item.nome }
+                    return { key: item.id, value: item.nome }
                 })
                 setData(newArray)
+                setCategoriasSalvas(response.data)
             })
             .catch((e) => {
                 console.log(e)
@@ -54,61 +58,48 @@ export const Insert = () => {
             aspect: [4, 3],
             quality: 1,
         });
-        // console.log(result);
 
         if (!result.canceled) {
             setImage(result.assets[0].uri);
         }
     };
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-
-    const [categorias, setCategorias] = useState([])
-    const [categoriaJson, setCategoriaJson] = useState("")
-    // console.log(categoria);
     const post = async () => {
         const tokenStorage = await AsyncStorage.getItem("@app_token")
         if (nome == "" || descricao == "" || qtdEstoque == "" || valorUnitario == "") {
-            // if (nome == "" || descricao == "" || qtdEstoque == "" || valorUnitario == "" || categoria == "" || categoria == "Escolha a categoria") {
             alert("Preencha todos os campos")
             return
         }
-        console.log("<<<<<<<<<<<<<<<<");
+
+        let idCategoria
+        categoriasSalvas.forEach(item => {
+            if (categoria == item.nome) {
+                idCategoria = (item.id)
+            }
+        });
+
         const novoProduto = {
             nome: nome,
             descricao: descricao,
             qtdEstoque: parseInt(qtdEstoque),
             valorUnitario: parseFloat(valorUnitario),
-            idCategoria: categoria.idCategoria
+            idCategoria: idCategoria,
         }
-
-        const json = JSON.stringify(novoProduto)
-        const blob = new Blob([json], { type: 'application/json' })
         // console.log(novoProduto);
+        const produto = JSON.stringify(novoProduto)
         const formData = new FormData();
-        // formData.append("file", image);
-        // formData.append("produto", blob);
         formData.append('file', {
-            // uri: pictureUri,
             uri: image,
             type: 'image/jpeg',
-            name: 'profile-picture'
+            name: 'file'
         })
-
-        // console.log(categoria);
-        // console.log(blob)
-        // console.log(image)
-        // console.log(token)
-
+        formData.append('produto', {
+            "string": JSON.stringify(novoProduto),
+            type: 'application/json',
+            name: 'produto'
+        })
         const { data } = await api.post("/api/produto", formData, { headers: { "Authorization": `${tokenStorage}`, "Accept": "application/json", "Content-Type": "multipart/form-data" } })
-        console.log("Aqui sgfu");
-        console.log(data);
-
-        // const { data } = await api.post("/api/produto", formData)
-        // console.log(data)
-        // navigate('/painel')
-        //
-        //
+        navigation.navigate("Busca");
     }
 
     return (
@@ -126,13 +117,11 @@ export const Insert = () => {
                             onPress={pickImage}>
                             <Text style={styles.buttonText}>Selecionar arquivo</Text>
                         </TouchableOpacity>
-                        {/* <Button title="Pick an image from camera roll" onPress={pickImage} /> */}
                     </View>
 
                     <Text style={styles.titulo}>Nome produto:</Text>
                     <TextInput
                         style={styles.inputNome}
-                        // keyboardType='phone'
                         textAlign='left'
                         placeholder='Digite o nome do produto (máx.30)'
                         onChangeText={setNome}
@@ -194,8 +183,11 @@ export const Insert = () => {
                         <Text style={styles.buttonText}>SALVAR   ALTERAÇÕES</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.buttonDeletar} >
-                        <Text style={styles.buttonText}>DELETAR   PRODUTO</Text>
+                    <TouchableOpacity
+                        style={styles.buttonDeletar}
+                        onPress={() => navigation.goBack()}
+                    >
+                        <Text style={styles.buttonText}>Voltar</Text>
                     </TouchableOpacity>
 
                 </View>
