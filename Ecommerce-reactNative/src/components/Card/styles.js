@@ -48,7 +48,8 @@ export const styles = StyleSheet.create({
     },
     img: {
         height: '100%',
-        width: '40%'
+        width: '40%',
+        borderRadius: 10
     }
 
 })

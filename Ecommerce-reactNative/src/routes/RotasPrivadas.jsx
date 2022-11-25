@@ -9,6 +9,7 @@ import { Insert } from '../screens/Insert';
 import { UpdateDelete } from '../screens/UpdateDelete';
 import { FontAwesome, FontAwesome5, AntDesign, Feather } from '@expo/vector-icons';
 import { Logout } from '../screens/Logout';
+import { StatusBar } from 'react-native';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator()
@@ -53,7 +54,7 @@ export const RotasPrivadas = () => {
             } else if (route.name === 'Busca') {
               iconName = focused ? 'ios-list' : 'ios-list-outline';
               iconColor = focused ? 'red' : 'black';
-              return <FontAwesome name="home" size={24} color={iconColor} />;
+              return <AntDesign name="search1" size={24} color={iconColor} />;
             }
           },
           tabBarActiveTintColor: 'tomato',
@@ -85,6 +86,13 @@ export const RotasPrivadas = () => {
         />
 
       </Tab.Navigator>
+      <StatusBar
+        barStyle='light-content'
+        // hidden={false} backgroundColor='#0066CC'
+        translucent={true}
+        networkActivityIndicatorVisible={true}
+        // hidden={true}
+      />
     </>
   );
 };

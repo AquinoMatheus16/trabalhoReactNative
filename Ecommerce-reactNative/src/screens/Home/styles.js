@@ -7,18 +7,18 @@ export const styles = StyleSheet.create({
     paddingBottom: 90
   },
   containerInput: {
-    marginTop: '12%',
+    marginTop: 26,
     width: '100%',
     height: 40,
     alignItems: 'center',
-    marginBottom: 20
+    marginBottom: 26,
   },
 
   inputBusca: {
     paddingHorizontal: 40,
     width: '90%',
     paddingVertical: 1,
-    backgroundColor:'#FFF',
+    backgroundColor: '#FFF',
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
@@ -41,5 +41,5 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
     borderRadius: 10,
-  }
+  },
 });

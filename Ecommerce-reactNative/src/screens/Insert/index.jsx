@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import { api } from '../../services/api';
 import React from 'react';
 import * as ImagePicker from 'expo-image-picker';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const Insert = () => {
     const [produto, setProduto] = useState([]);
@@ -19,13 +20,11 @@ export const Insert = () => {
     const [image, setImage] = useState(null);
 
     const getCategoria = async () => {
-        api.get('/api/produto')
+        api.get('/api/categoria')
             .then((response) => {
-                // Store Values in Temporary Array
                 let newArray = response.data.map((item) => {
                     return { key: item.idCategoria, value: item.nome }
                 })
-                //Set Data Variable
                 setData(newArray)
             })
             .catch((e) => {
@@ -55,12 +54,62 @@ export const Insert = () => {
             aspect: [4, 3],
             quality: 1,
         });
-        console.log(result);
+        // console.log(result);
 
         if (!result.canceled) {
             setImage(result.assets[0].uri);
         }
     };
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+
+    const [categorias, setCategorias] = useState([])
+    const [categoriaJson, setCategoriaJson] = useState("")
+    // console.log(categoria);
+    const post = async () => {
+        const tokenStorage = await AsyncStorage.getItem("@app_token")
+        if (nome == "" || descricao == "" || qtdEstoque == "" || valorUnitario == "") {
+            // if (nome == "" || descricao == "" || qtdEstoque == "" || valorUnitario == "" || categoria == "" || categoria == "Escolha a categoria") {
+            alert("Preencha todos os campos")
+            return
+        }
+        console.log("<<<<<<<<<<<<<<<<");
+        const novoProduto = {
+            nome: nome,
+            descricao: descricao,
+            qtdEstoque: parseInt(qtdEstoque),
+            valorUnitario: parseFloat(valorUnitario),
+            idCategoria: categoria.idCategoria
+        }
+
+        const json = JSON.stringify(novoProduto)
+        const blob = new Blob([json], { type: 'application/json' })
+        // console.log(novoProduto);
+        const formData = new FormData();
+        // formData.append("file", image);
+        // formData.append("produto", blob);
+        formData.append('file', {
+            // uri: pictureUri,
+            uri: image,
+            type: 'image/jpeg',
+            name: 'profile-picture'
+        })
+
+        // console.log(categoria);
+        // console.log(blob)
+        // console.log(image)
+        // console.log(token)
+
+        const { data } = await api.post("/api/produto", formData, { headers: { "Authorization": `${tokenStorage}`, "Accept": "application/json", "Content-Type": "multipart/form-data" } })
+        console.log("Aqui sgfu");
+        console.log(data);
+
+        // const { data } = await api.post("/api/produto", formData)
+        // console.log(data)
+        // navigate('/painel')
+        //
+        //
+    }
 
     return (
         <ScrollView>
@@ -103,10 +152,10 @@ export const Insert = () => {
                     <Text style={styles.titulo}>Categoria: </Text>
                     <View style={styles.containerCategoria}>
                         <SelectList
-                            setSelected={(categoria) => setSelected(categoria)}
+                            setSelected={(val) => setSelected(val)}
                             data={data}
-                            save={setCategoria}
-                            // onSelect={() => ()}
+                            save='value'
+                            onSelect={() => setCategoria(selected)}
                             boxStyles={{ borderRadius: 0, borderColor: 'black' }}
                             dropdownStyles={{ borderRadius: 0, borderColor: 'black' }}
                             searchPlaceholder='Pesquisar'
@@ -138,7 +187,10 @@ export const Insert = () => {
                         />
                     </View>
 
-                    <TouchableOpacity style={styles.buttonSalvar}  >
+                    <TouchableOpacity
+                        style={styles.buttonSalvar}
+                        onPress={post}
+                    >
                         <Text style={styles.buttonText}>SALVAR   ALTERAÇÕES</Text>
                     </TouchableOpacity>
 

@@ -15,8 +15,10 @@ export const Equipe = () => {
   }
 
   return (
+
     <View style={styles.container}>
       <ScrollView>
+        {/* <ImageBackground source={imageBack} style={styles.imageBackground} /> */}
         <Text style={styles.tituloPagina}>Equipe:</Text>
         <View style={styles.integrantes}>
           <View style={styles.cardPessoa}>
@@ -106,6 +108,7 @@ export const Equipe = () => {
             <Text style={styles.nome}>Repositório App</Text>
           </View>
         </View>
+        {/* </ImageBackground> */}
       </ScrollView>
       <StatusBar style="auto" />
     </View>

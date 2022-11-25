@@ -4,7 +4,7 @@ import { api } from './api';
 export const getProduto = async () => {
     try {
         const { data } = await api.get("/api/produto")
-        console.log(data)
+        // console.log(data)
         return data;
     } catch (e) {
         console.log(e)
@@ -15,7 +15,7 @@ export const getProduto = async () => {
 export const getProdutoId = async (produto) => {
     try {
         const { data } = await api.get("/produto" + produto.id)
-        console.log(data)
+        // console.log(data)
         return data;
     } catch (e) {
         console.log(e)
@@ -26,7 +26,7 @@ export const getProdutoId = async (produto) => {
 export const getImagem = async (produto) => {
     try {
         const { data } = await api.get("/produto" + produto.id)
-        console.log(data)
+        // console.log(data)
         return data;
     } catch (e) {
         console.log(e)
