@@ -115,8 +115,9 @@ export const styles = StyleSheet.create({
         color: '#FFFF'
     },
     img: {
+        width: 200,
         height: 200,
-        width: 300,
-        borderRadius: 10
+        marginTop: 20,
+        marginBottom: 15
     }
 });

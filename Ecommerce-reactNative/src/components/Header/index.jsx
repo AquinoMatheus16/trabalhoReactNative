@@ -10,8 +10,7 @@ export const Header = () => {
                 source={require('../../../assets/drogatec_Logo.png')}
                 style={styles.logo}
             />
-            <Entypo name="menu" size={30} color="black" style={styles.menuIcone} />
-            {/* <StatusBar style="auto" /> */}
+            {/* <Entypo name="menu" size={30} color="black" style={styles.menuIcone} /> */}
         </View>
     );
 };

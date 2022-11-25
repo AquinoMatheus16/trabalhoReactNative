@@ -1,4 +1,4 @@
-import { View, Text, TextInput, TouchableOpacity, ScrollView, Image } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, ScrollView, Image, Alert } from 'react-native';
 import { styles } from './styles';
 import { EvilIcons } from '@expo/vector-icons';
 import { SelectList } from 'react-native-dropdown-select-list';
@@ -20,7 +20,7 @@ export const Insert = () => {
     const [data, setData] = useState([]);
     const [image, setImage] = useState(null);
     const navigation = useNavigation();
-    
+
 
     const getCategoria = async () => {
         api.get('/api/categoria')
@@ -65,41 +65,49 @@ export const Insert = () => {
     };
 
     const post = async () => {
-        const tokenStorage = await AsyncStorage.getItem("@app_token")
-        if (nome == "" || descricao == "" || qtdEstoque == "" || valorUnitario == "") {
-            alert("Preencha todos os campos")
-            return
-        }
-
-        let idCategoria
-        categoriasSalvas.forEach(item => {
-            if (categoria == item.nome) {
-                idCategoria = (item.id)
+        try {
+            const tokenStorage = await AsyncStorage.getItem("@app_token")
+            if (nome == "" || descricao == "" || qtdEstoque == "" || valorUnitario == "" || categoria == "") {
+                alert("Preencha todos os campos")
+                return
             }
-        });
 
-        const novoProduto = {
-            nome: nome,
-            descricao: descricao,
-            qtdEstoque: parseInt(qtdEstoque),
-            valorUnitario: parseFloat(valorUnitario),
-            idCategoria: idCategoria,
+            let idCategoria
+            categoriasSalvas.forEach(item => {
+                if (categoria == item.nome) {
+                    idCategoria = (item.id)
+                }
+            });
+
+            const novoProduto = {
+                nome: nome,
+                descricao: descricao,
+                qtdEstoque: parseInt(qtdEstoque),
+                valorUnitario: parseFloat(valorUnitario),
+                idCategoria: idCategoria,
+            }
+            // console.log(novoProduto);
+            const produto = JSON.stringify(novoProduto)
+            const formData = new FormData();
+            formData.append('file', {
+                uri: image,
+                type: 'image/jpeg',
+                name: 'file'
+            })
+            formData.append('produto', {
+                "string": JSON.stringify(novoProduto),
+                type: 'application/json',
+                name: 'produto'
+            })
+            const { data } = await api.post("/api/produto", formData, { headers: { "Authorization": `${tokenStorage}`, "Accept": "application/json", "Content-Type": "multipart/form-data" } })
+            alert('Produto adicionado com suecsso!')
+
+            navigation.navigate("Busca");
+
+        } catch (e) {
+            // console.error(e)
+            alert("Não possível inserir o produto.");
         }
-        // console.log(novoProduto);
-        const produto = JSON.stringify(novoProduto)
-        const formData = new FormData();
-        formData.append('file', {
-            uri: image,
-            type: 'image/jpeg',
-            name: 'file'
-        })
-        formData.append('produto', {
-            "string": JSON.stringify(novoProduto),
-            type: 'application/json',
-            name: 'produto'
-        })
-        const { data } = await api.post("/api/produto", formData, { headers: { "Authorization": `${tokenStorage}`, "Accept": "application/json", "Content-Type": "multipart/form-data" } })
-        navigation.navigate("Busca");
     }
 
     return (
@@ -107,7 +115,7 @@ export const Insert = () => {
             <View style={styles.container}>
                 <View style={styles.main}>
 
-                    {image ? <Image source={{ uri: image }} style={{ width: 200, height: 200, justifyContent: 'center', alignItems: 'center', marginTop: 20 }} /> : <EvilIcons name="image" size={300} color="black" />}
+                    {image ? <Image source={{ uri: image }} style={styles.img} /> : <EvilIcons name="image" size={300} color="black" />}
 
                     <View style={styles.container2}>
                         <Text>Imagem do produto: </Text>
@@ -184,7 +192,7 @@ export const Insert = () => {
                     </TouchableOpacity>
 
                     <TouchableOpacity
-                        style={styles.buttonDeletar}
+                        style={styles.buttonVoltar}
                         onPress={() => navigation.goBack()}
                     >
                         <Text style={styles.buttonText}>Voltar</Text>

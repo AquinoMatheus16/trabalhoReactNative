@@ -101,9 +101,9 @@ export const styles = StyleSheet.create({
         fontSize: 15,
     },
 
-    buttonDeletar: {
+    buttonVoltar: {
         alignItems: "center",
-        // backgroundColor: '#FF0000',
+        // backgroundColor: '#',
         backgroundColor: '#B22222',
         padding: 10,
         borderRadius: 20,
@@ -114,4 +114,10 @@ export const styles = StyleSheet.create({
         fontSize: 15,
         color: '#FFFF'
     },
+    img: {
+        width: 200,
+        height: 200,
+        marginTop: 20,
+        marginBottom: 15
+    }
 });

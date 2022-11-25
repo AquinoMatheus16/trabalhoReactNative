@@ -17,7 +17,7 @@ export const styles = StyleSheet.create({
     },
 
     containerCard: {
-        width: '100%',
+        width: 330,
         height: 150,
         // backgroundColor: '#436',
         flexDirection: 'row',
@@ -47,8 +47,8 @@ export const styles = StyleSheet.create({
         paddingLeft: 5
     },
     img: {
-        height: '100%',
-        width: '40%',
+        height: 140,
+        width: 140,
         borderRadius: 10
     }
 

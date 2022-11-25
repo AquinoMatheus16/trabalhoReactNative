@@ -70,44 +70,53 @@ export const UpdateDelete = ({ route }) => {
         }
     };
 
-    const post = async () => {
-        const tokenStorage = await AsyncStorage.getItem("@app_token")
-        if (nome == "" || descricao == "" || qtdEstoque == "" || valorUnitario == "") {
-            alert("Preencha todos os campos")
-            return
-        }
+    const put = async () => {
+        try {
 
-        let idCategoria
-        categoriasSalvas.forEach(item => {
-            if (categoria == item.nome) {
-                idCategoria = (item.id)
+            const tokenStorage = await AsyncStorage.getItem("@app_token")
+            if (nome == "" || descricao == "" || qtdEstoque == "" || valorUnitario == "" || categoria == "") {
+                alert("Preencha todos os campos")
+                return
             }
-        });
 
-        const novoProduto = {
-            nome: nome,
-            descricao: descricao,
-            qtdEstoque: parseInt(qtdEstoque),
-            valorUnitario: parseFloat(valorUnitario),
-            idCategoria: idCategoria,
+            let idCategoria = categoria
+            categoriasSalvas.forEach(item => {
+                if (categoria == item.nome) {
+                    idCategoria = (item.id)
+                }
+            });
+
+            const novoProduto = {
+                nome: nome,
+                descricao: descricao,
+                qtdEstoque: parseInt(qtdEstoque),
+                valorUnitario: parseFloat(valorUnitario),
+                idCategoria: idCategoria
+            }
+            console.log(novoProduto);
+            const produto = JSON.stringify(novoProduto)
+            const formData = new FormData();
+            formData.append('file', {
+                uri: image,
+                type: 'image/jpeg',
+                name: 'file'
+            })
+            formData.append('produto', {
+                "string": JSON.stringify(novoProduto),
+                type: 'application/json',
+                name: 'produto'
+            })
+
+            const { data } = await api.put("/api/produto/" + item.idProduto, formData, { headers: { "Authorization": `${tokenStorage}`, "Accept": "application/json", "Content-Type": "multipart/form-data" } })
+            // navigation.navigate("Busca")
+            alert('Produto alterado com suecsso!')
+            navigation.goBack();
+
+        } catch (e) {
+            // console.error(e);
+            alert("Não possível alterar o produto.");
         }
-        // console.log(novoProduto);
-        const produto = JSON.stringify(novoProduto)
-        const formData = new FormData();
-        formData.append('file', {
-            uri: image,
-            type: 'image/jpeg',
-            name: 'file'
-        })
-        formData.append('produto', {
-            "string": JSON.stringify(novoProduto),
-            type: 'application/json',
-            name: 'produto'
-        })
-
-        const { data } = await api.post("/api/produto", formData, { headers: { "Authorization": `${tokenStorage}`, "Accept": "application/json", "Content-Type": "multipart/form-data" } })
-        navigation.navigate("Busca")
-    }
+    };
 
     const onDelete = async () => {
         const tokenStorage = await AsyncStorage.getItem("@app_token")
@@ -116,7 +125,6 @@ export const UpdateDelete = ({ route }) => {
         });
         navigation.goBack();
     }
-    // console.log(item);
 
     return (
         <ScrollView>
@@ -195,17 +203,17 @@ export const UpdateDelete = ({ route }) => {
 
                     <TouchableOpacity
                         style={styles.buttonSalvar}
-                        onPress={post}
+                        onPress={put}
                     >
                         <Text style={styles.buttonText}>SALVAR   ALTERAÇÕES</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity
+                    {/* <TouchableOpacity
                         style={styles.buttonDeletar}
                         onPress={() => navigation.goBack()}
                     >
                         <Text style={styles.buttonText}>Voltar</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
 
                     <TouchableOpacity
                         style={styles.buttonDeletar}

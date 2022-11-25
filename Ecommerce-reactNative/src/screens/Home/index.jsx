@@ -11,7 +11,7 @@ export const Home = () => {
 
   const [produtos, setProdutos] = useState([]);
   const [itemFiltrado, setItemFiltrado] = useState([]);
-  const [busca, setBusca] = useState();
+  const [busca, setBusca] = useState("");
   const [input, setInput] = useState();
   const navigation = useNavigation();
 
