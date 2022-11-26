@@ -53,7 +53,6 @@ export const AuthProvider = ({ children }) => {
                 api.defaults.headers['Authorization'] = `Bearer ${tokenStorage}`
             }
 
-            // await new Promise(resolve => setTimeout(resolve, 10000))
             setLoading(false)
         }
         verificaStorage()
