@@ -64,6 +64,20 @@ export const Insert = () => {
         }
     };
 
+    const confirmarIserir = () =>
+        Alert.alert(
+            "Aviso",
+            "Deseja mesmo salvar as alterações?",
+            [
+                {
+                    text: "Cancel",
+                    onPress: () => null,
+                    style: "cancel"
+                },
+                { text: "OK", onPress: () => post() }
+            ]
+        );
+
     const post = async () => {
         try {
             const tokenStorage = await AsyncStorage.getItem("@app_token")
@@ -100,13 +114,31 @@ export const Insert = () => {
                 name: 'produto'
             })
             const { data } = await api.post("/api/produto", formData, { headers: { "Authorization": `${tokenStorage}`, "Accept": "application/json", "Content-Type": "multipart/form-data" } })
-            alert('Produto adicionado com suecsso!')
 
+            Alert.alert(
+                'Aviso',
+                'Produto adicionado com suecsso!',
+                [
+                    {
+                        text: "OK",
+                        onPress: () => null
+                    }
+                ]
+            );
             navigation.navigate("Busca");
 
         } catch (e) {
             console.error(e)
-            // alert("Não possível inserir o produto.");
+            Alert.alert(
+                'Aviso',
+                'Não possível inserir o produto.',
+                [
+                    {
+                        text: "OK",
+                        onPress: () => null
+                    }
+                ]
+            );
         }
     }
 
@@ -186,7 +218,7 @@ export const Insert = () => {
 
                     <TouchableOpacity
                         style={styles.buttonSalvar}
-                        onPress={post}
+                        onPress={confirmarIserir}
                     >
                         <Text style={styles.buttonText}>SALVAR   ALTERAÇÕES</Text>
                     </TouchableOpacity>

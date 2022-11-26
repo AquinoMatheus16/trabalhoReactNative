@@ -13,7 +13,6 @@ export const Login = () => {
     if (username != '' && password != '') {
       loginContext(username, password);
     }
-
   };
 
   return (
@@ -21,14 +20,13 @@ export const Login = () => {
       <View style={styles.containerLogin}>
 
         <View style={styles.logoContainer}>
-          <ImageBackground source={logo} style={styles.imagemLogo}/>
+          <ImageBackground source={logo} style={styles.imagemLogo} />
         </View>
 
         <Text>LOGIN</Text>
         <TextInput
           style={styles.input}
           placeholder='INSIRA SEU LOGIN'
-          // onChangeText={(e) => setUsername(e.target.value)}
           onChangeText={setUsername}
           value={username}
         />
@@ -37,7 +35,6 @@ export const Login = () => {
         <TextInput
           style={styles.input}
           placeholder='INSIRA SUA SENHA'
-          // onChangeText={(e) => setPassword(e.target.value)}
           onChangeText={setPassword}
           value={password}
           secureTextEntry={true}
@@ -48,6 +45,7 @@ export const Login = () => {
             <Text style={styles.entrar}>ENTRAR</Text>
           </View>
         </TouchableOpacity>
+
       </View>
     </View>
   );

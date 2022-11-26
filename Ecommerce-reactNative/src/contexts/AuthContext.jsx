@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from "react";
+import { Alert } from 'react-native';
 import { login } from "../services/auth";
 import { api } from "../services/api";
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -10,14 +11,29 @@ export const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(false);
 
     const loginContext = async (username, password) => {
-        const response = await login(username, password)
-        // console.log(response);
-        // console.log(response.headers.authorization);
-        if (response.headers.authorization) {
-            setUser(response.config.data)
-            api.defaults.headers['Authorization'] = `Bearer ${response.headers.authorization}`
-            await AsyncStorage.setItem("@app_user", JSON.stringify(response.config.data))
-            await AsyncStorage.setItem("@app_token", response.headers.authorization)
+        try {
+            const response = await login(username, password)
+            // console.log(response);
+            // console.log(response.headers.authorization);
+            if (response.headers.authorization) {
+                setUser(response.config.data)
+                api.defaults.headers['Authorization'] = `Bearer ${response.headers.authorization}`
+                await AsyncStorage.setItem("@app_user", JSON.stringify(response.config.data))
+                await AsyncStorage.setItem("@app_token", response.headers.authorization)
+            }
+
+        } catch (e) {
+            // console.error(e);
+            Alert.alert(
+                'Aviso',
+                'Senha e/ou email incorretos.',
+                [
+                    {
+                        text: "OK",
+                        onPress: () => null
+                    }
+                ]
+            );
         }
     };
 

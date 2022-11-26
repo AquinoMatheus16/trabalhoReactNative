@@ -15,12 +15,13 @@ export const Card = ({ item }) => {
                     <View style={styles.containerCard}>
                         <Image source={{ uri: item.urlImagem }} style={styles.img} />
                         <View>
-                            <Text style={styles.textoDescricao}>Descrição: {item.descricao}</Text>
+                            {/* <Text style={styles.textoDescricao}>Descrição: {item.descricao}</Text> */}
                             <Text style={styles.texto}>Categoria: {item.categoria.nome}</Text>
                             <Text style={styles.texto}>Quant. em estoque: {item.qtdEstoque}</Text>
                             <Text style={styles.texto}>Data cadastro: {item.dataCadastro}</Text>
 
-                            <Text style={styles.textoValor}>Valor unitário: R${item.valorUnitario}</Text>
+                            {/* <Text style={styles.textoValor}>Valor unitário: R${item.valorUnitario}</Text> */}
+                            <Text style={styles.textoValor}>Valor unitário: R${(Math.floor(item.valorUnitario*100).toFixed(0)/100).toFixed(2)}</Text>
                         </View>
                     </View>
                 </View>

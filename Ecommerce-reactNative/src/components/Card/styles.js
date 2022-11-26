@@ -13,7 +13,9 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 20,
         backgroundColor: '#FFF',
-        marginBottom: 20
+        marginBottom: 20,
+        paddingTop: 10,
+        paddingBottom: 10
     },
 
     containerCard: {
@@ -21,7 +23,8 @@ export const styles = StyleSheet.create({
         height: 150,
         // backgroundColor: '#436',
         flexDirection: 'row',
-        padding: 8
+        padding: 8,
+        justifyContent:'center'
     },
 
     textoNome: {
@@ -38,18 +41,19 @@ export const styles = StyleSheet.create({
     texto: {
         fontSize: 13,
         maxWidth: "90%",
-        paddingLeft: 5
+        paddingLeft: 5,
+        marginBottom: 5
     },
     textoValor: {
-        fontSize: 17,
+        fontSize: 15,
         marginBottom: 5,
-        marginTop: 5,
-        paddingLeft: 5
+        paddingLeft: 5,
     },
     img: {
-        height: 140,
-        width: 140,
-        borderRadius: 10
+        height: 130,
+        width: 130,
+        borderRadius: 10,
+        marginRight: 11
     }
 
 })
