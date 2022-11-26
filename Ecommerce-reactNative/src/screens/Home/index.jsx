@@ -22,8 +22,9 @@ export const Home = () => {
   };
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    setItemFiltrado(produtos)
+
+  }, [produtos]);
 
   useEffect(() => {
     navigation.addListener('focus', () => fetchData())

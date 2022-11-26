@@ -41,7 +41,7 @@ export const UpdateDelete = ({ route }) => {
     useEffect(() => {
         getCategoria();
         setNome(item.nome)
-        setValorUnitario("" + (Math.floor(item.valorUnitario*100).toFixed(0)/100).toFixed(2))
+        setValorUnitario("" + (Math.floor(item.valorUnitario * 100).toFixed(0) / 100).toFixed(2))
         setQtdEstoque("" + item.qtdEstoque)
         setDescricao(item.descricao)
         setCategoria(item.categoria.id)
@@ -54,7 +54,7 @@ export const UpdateDelete = ({ route }) => {
             if (Platform.OS !== 'web') {
                 const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
                 if (status !== 'granted') {
-                    alert('Sorry, we need camera roll permissions to make this work!');
+                    alert('Desculpe, precisamos de permissões de rolo da câmera para fazer isso funcionar!');
                 }
             }
         })();
@@ -124,6 +124,7 @@ export const UpdateDelete = ({ route }) => {
                 valorUnitario: parseFloat(valorUnitario),
                 idCategoria: idCategoria
             }
+            console.log(image);
             // console.log(novoProduto);
             const produto = JSON.stringify(novoProduto)
             const formData = new FormData();
@@ -209,7 +210,7 @@ export const UpdateDelete = ({ route }) => {
             <View style={styles.container}>
                 <View style={styles.main}>
 
-                    {image ? <Image source={{ uri: image }} style={styles.img} /> : <Image source={{ uri: item.urlImagem }} style={styles.img} />}
+                    <Image source={{ uri: image + '?' + new Date() }} style={styles.img} />
 
                     <View style={styles.container2}>
                         <Text>Imagem do produto: </Text>
