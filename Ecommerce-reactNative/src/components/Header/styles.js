@@ -4,7 +4,7 @@ export const styles = StyleSheet.create({
 
   header: {
     backgroundColor: 'white',
-    height: '12%',
+    height: '10%',
     flexDirection: 'row',
     // paddingTop: '6%',
     justifyContent: 'center',
@@ -12,14 +12,14 @@ export const styles = StyleSheet.create({
   },
 
   logo: {
-    margin: '4%',
-    height: 30,
+    // margin: '4%',
+    height: 31,
     width: 160
   },
 
-  menuIcone: {
-    margin: 15,
-    // alignSelf: 'flex-end',
-    marginLeft: '35%'
-  },
+  // menuIcone: {
+  //   margin: 15,
+  //   // alignSelf: 'flex-end',
+  //   marginLeft: '35%'
+  // },
 });

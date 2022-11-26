@@ -7,7 +7,7 @@ export const getProduto = async () => {
         // console.log(data)
         return data;
     } catch (e) {
-        console.log(e)
+        console.error(e);
     }
 };
 
@@ -18,7 +18,7 @@ export const getProdutoId = async (produto) => {
         // console.log(data)
         return data;
     } catch (e) {
-        console.log(e)
+        console.error(e);
     }
 };
 
@@ -29,7 +29,7 @@ export const getImagem = async (produto) => {
         // console.log(data)
         return data;
     } catch (e) {
-        console.log(e)
+        console.error(e);
     }
 };
 
@@ -39,7 +39,7 @@ export const newProduto = async (novoProduto) => {
         const produto = await api.post("/produto", novoProduto)
         return produto;
     } catch (e) {
-        console.log(e)
+        console.error(e);
     }
 };
 
@@ -49,7 +49,7 @@ export const updateProduto = async (produto) => {
         const updateProduto = await api.put("/produto/" + produto.id, produto)
         return updateProduto;
     } catch (e) {
-        console.log(e)
+        console.error(e);
     }
 };
 
@@ -59,6 +59,6 @@ export const deleteProduto = async (id) => {
         const deletedTask = await api.delete("/produto/" + id)
         return deletedTask;
     } catch (e) {
-        console.log(e)
+        console.error(e);
     }
 };

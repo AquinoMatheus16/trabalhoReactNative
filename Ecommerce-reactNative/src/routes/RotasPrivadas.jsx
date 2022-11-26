@@ -87,10 +87,12 @@ export const RotasPrivadas = () => {
 
       </Tab.Navigator>
       <StatusBar
-        // barStyle='light-content'
+        barStyle='light-content'
         // barStyle='dark-content'
         // hidden={true} 
-        // backgroundColor='#f3f6f9'
+        // backgroundColor='#060dd3'
+        backgroundColor='#5d5e5f'
+
         // backgroundColor='white'
         translucent={false}
         networkActivityIndicatorVisible={true}

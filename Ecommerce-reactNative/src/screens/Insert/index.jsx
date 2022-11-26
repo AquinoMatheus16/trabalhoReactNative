@@ -105,8 +105,8 @@ export const Insert = () => {
             navigation.navigate("Busca");
 
         } catch (e) {
-            // console.error(e)
-            alert("Não possível inserir o produto.");
+            console.error(e)
+            // alert("Não possível inserir o produto.");
         }
     }
 

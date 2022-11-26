@@ -18,24 +18,20 @@ export const styles = StyleSheet.create({
         width: '80%',
         height: 40,
         flexDirection: 'row',
-        // backgroundColor: '#0433',
         alignItems: 'center'
     },
     containerCategoria: {
         width: '80%',
-        // backgroundColor:'#8555'
     },
 
     containerValorUnitario: {
         flexDirection: 'row',
         width: '85%',
-        // backgroundColor: '#9229',
         justifyContent: 'center'
     },
     containerRs: {
         height: 30,
         width: 29,
-        // marginLeft: 38,
         backgroundColor: '#1124',
         alignItems: 'center',
         justifyContent: 'center'
@@ -60,12 +56,10 @@ export const styles = StyleSheet.create({
         borderWidth: 1,
         width: '80%',
         paddingLeft: 8,
-        // alignItems: 'flex-start'
     },
     titulo: {
         alignSelf: 'flex-start',
         marginLeft: '11%',
-        // backgroundColor: '#8888',
         marginTop: 20
     },
 
@@ -103,8 +97,15 @@ export const styles = StyleSheet.create({
 
     buttonDeletar: {
         alignItems: "center",
-        // backgroundColor: '#FF0000',
-        backgroundColor: '#B22222',
+        backgroundColor: '#FF0000',
+        padding: 10,
+        borderRadius: 20,
+        width: '65%',
+        margin: 20
+    },
+    buttonVoltar: {
+        alignItems: "center",
+        backgroundColor: '#1E90F0',
         padding: 10,
         borderRadius: 20,
         width: '65%',

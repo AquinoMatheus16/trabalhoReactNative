@@ -2,9 +2,9 @@ import { api } from "./api";
 
 export const newLogin = async (novoLogin) => {
     try {
-        const produto = await api.post("/login", novoLogin)
-        return produto;
+        const login = await api.post("/login", novoLogin)
+        return login;
     } catch (e) {
-        console.log(e)
+        console.error(e);
     }
 };

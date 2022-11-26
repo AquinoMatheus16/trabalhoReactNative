@@ -2,12 +2,13 @@ import { View, Text, TextInput, TouchableOpacity, ScrollView, Image } from 'reac
 import { styles } from './styles';
 import { EvilIcons } from '@expo/vector-icons';
 import { SelectList } from 'react-native-dropdown-select-list';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { api } from '../../services/api';
 import React from 'react';
 import * as ImagePicker from 'expo-image-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from "@react-navigation/native";
+import { AuthContext } from "../../contexts/AuthContext";
 
 export const UpdateDelete = ({ route }) => {
     const [descricao, setDescricao] = useState("");
@@ -21,6 +22,7 @@ export const UpdateDelete = ({ route }) => {
     const [image, setImage] = useState(null);
     const navigation = useNavigation();
     const { item } = route.params;
+    const { logado, loading } = useContext(AuthContext);
 
     const getCategoria = async () => {
         api.get('/api/categoria')
@@ -93,7 +95,7 @@ export const UpdateDelete = ({ route }) => {
                 valorUnitario: parseFloat(valorUnitario),
                 idCategoria: idCategoria
             }
-            console.log(novoProduto);
+            // console.log(novoProduto);
             const produto = JSON.stringify(novoProduto)
             const formData = new FormData();
             formData.append('file', {
@@ -109,12 +111,19 @@ export const UpdateDelete = ({ route }) => {
 
             const { data } = await api.put("/api/produto/" + item.idProduto, formData, { headers: { "Authorization": `${tokenStorage}`, "Accept": "application/json", "Content-Type": "multipart/form-data" } })
             // navigation.navigate("Busca")
+
+            if (loading) return (
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                    <ActivityIndicator size='large' color='#f70000' />
+                </View>
+            );
+
             alert('Produto alterado com suecsso!')
             navigation.goBack();
 
         } catch (e) {
-            // console.error(e);
-            alert("Não possível alterar o produto.");
+            console.error(e);
+            // alert("Não possível alterar o produto.");
         }
     };
 
@@ -124,7 +133,7 @@ export const UpdateDelete = ({ route }) => {
             headers: { Authorization: `${tokenStorage}` },
         });
         navigation.goBack();
-    }
+    };
 
     return (
         <ScrollView>
@@ -208,18 +217,18 @@ export const UpdateDelete = ({ route }) => {
                         <Text style={styles.buttonText}>SALVAR   ALTERAÇÕES</Text>
                     </TouchableOpacity>
 
-                    {/* <TouchableOpacity
-                        style={styles.buttonDeletar}
-                        onPress={() => navigation.goBack()}
-                    >
-                        <Text style={styles.buttonText}>Voltar</Text>
-                    </TouchableOpacity> */}
-
                     <TouchableOpacity
                         style={styles.buttonDeletar}
                         onPress={onDelete}
                     >
                         <Text style={styles.buttonText}>DELETAR</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                        style={styles.buttonVoltar}
+                        onPress={() => navigation.goBack()}
+                    >
+                        <Text style={styles.buttonText}>Voltar</Text>
                     </TouchableOpacity>
 
                 </View>
